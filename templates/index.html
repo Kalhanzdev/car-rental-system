@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental System - Book Your Ride!</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="main-content">
+        <div class="container my-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-7 col-md-9 col-sm-11">
+                    <div class="card shadow-lg border-0 rounded-4 animate__animated animate__fadeInUpBig">
+                        <div class="card-body p-4 p-md-5">
+                            <h1 class="card-title text-center mb-4 display-5 fw-bold text-dark animate__animated animate__bounceIn">
+                                <span class="d-block">🚗 Car Rental System</span>
+                                <small class="text-muted fs-6 d-block mt-2 animate__animated animate__zoomIn animate__delay-1s">Your journey starts here.</small>
+                            </h1>
+                            <hr class="mb-4 animate__animated animate__fadeIn animate__delay-1s">
+
+                            <form method="POST" action="/" class="needs-validation" novalidate>
+                                <div class="mb-3 animate__animated animate__fadeInLeft animate__delay-1-2s">
+                                    <label for="name" class="form-label fw-bold text-dark">Full Name:</label>
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="e.g., John Doe" required aria-describedby="nameHelp" value="{{ name_val if name_val else '' }}">
+                                    <div id="nameHelp" class="form-text">Please enter your full name as it appears on your license.</div>
+                                    <div class="invalid-feedback">
+                                        Please provide your full name.
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 animate__animated animate__fadeInRight animate__delay-1-4s">
+                                    <label for="age" class="form-label fw-bold text-dark">Age:</label>
+                                    <input type="number" class="form-control" id="age" name="age" placeholder="Minimum 21" min="21" required aria-describedby="ageHelp" value="{{ age_val if age_val else '' }}">
+                                    <div id="ageHelp" class="form-text">Renters must be at least 21 years old.</div>
+                                    <div class="invalid-feedback">
+                                        Please provide a valid age (minimum 21).
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 animate__animated animate__fadeInLeft animate__delay-1-6s">
+                                    <label class="form-label d-block fw-bold text-dark mb-2">Do you have a Valid Driver's License?</label>
+                                    <div class="btn-group w-100" role="group" aria-label="Valid License Selection">
+                                        <input type="radio" class="btn-check" name="license" id="licenseYes" value="yes" autocomplete="off" required {% if license_val == 'yes' %}checked{% endif %}>
+                                        <label class="btn btn-outline-success py-2 px-4 fw-bold" for="licenseYes">Yes</label>
+
+                                        <input type="radio" class="btn-check" name="license" id="licenseNo" value="no" autocomplete="off" required {% if license_val == 'no' %}checked{% endif %}>
+                                        <label class="btn btn-outline-danger py-2 px-4 fw-bold" for="licenseNo">No</label>
+                                        <div class="invalid-feedback w-100 text-center mt-2">
+                                            Please confirm if you have a valid license.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 animate__animated animate__fadeInRight animate__delay-1-8s">
+                                    <label for="days" class="form-label fw-bold text-dark">Rental Days:</label>
+                                    <input type="number" class="form-control" id="days" name="days" placeholder="e.g., 3" min="1" required aria-describedby="daysHelp" value="{{ days_val if days_val else '' }}">
+                                    <div id="daysHelp" class="form-text">Enter the number of days you wish to rent the car.</div>
+                                    <div class="invalid-feedback">
+                                        Please enter a valid number of rental days (minimum 1).
+                                    </div>
+                                </div>
+
+                                <div class="mb-4 animate__animated animate__fadeInLeft animate__delay-2s">
+                                    <label for="car" class="form-label fw-bold text-dark">Select Car Type:</label>
+                                    <select name="car" id="car" class="form-select" required aria-describedby="carHelp">
+                                        <option value="" disabled {% if not car_val %}selected{% endif %}>Choose a car type...</option>
+                                        <option value="economy" {% if car_val == 'economy' %}selected{% endif %}>Economy ($30/day)</option>
+                                        <option value="suv" {% if car_val == 'suv' %}selected{% endif %}>SUV ($75/day)</option>
+                                        <option value="luxury" {% if car_val == 'luxury' %}selected{% endif %}>Luxury ($100/day)</option>
+                                        <option value="sport" {% if car_val == 'sport' %}selected{% endif %}>Sport ($150/day)</option>
+                                    </select>
+                                    <div id="carHelp" class="form-text">Prices are per day.</div>
+                                    <div class="invalid-feedback">
+                                        Please select a car type.
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-primary w-100 py-3 fw-bold fs-5 animate__animated animate__bounceInDown animate__delay-2-2s">Rent Now</button>
+                            </form>
+
+                            {# Errors and results are now shown on separate pages via redirection #}
+
+                        </div> </div> </div> </div> </div> </div> <footer class="footer mt-auto py-3 bg-dark text-white-50 text-center">
+        <div class="container">
+            <small>&copy; 2025 Car Rental System. All rights reserved.</small><br>
+            <small>Disclaimer: This is a demonstration project. No real transactions occur. This project is a portfolio piece by [Your Name/GitHub Handle].</small>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+    <script>
+        // Bootstrap form validation
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })();
+
+        // Handle license button selection (using Bootstrap's btn-check)
+        document.addEventListener('DOMContentLoaded', function() {
+            const licenseYes = document.getElementById('licenseYes');
+            const licenseNo = document.getElementById('licenseNo');
+
+            // Apply 'active' class to labels if input is checked on page load (e.g., after form submission)
+            if (licenseYes && licenseYes.checked) {
+                licenseYes.nextElementSibling.classList.add('active');
+            } else if (licenseNo && licenseNo.checked) {
+                licenseNo.nextElementSibling.classList.add('active');
+            }
+
+            if (licenseYes) {
+                licenseYes.addEventListener('change', function() {
+                    licenseYes.nextElementSibling.classList.add('active');
+                    if (licenseNo) licenseNo.nextElementSibling.classList.remove('active');
+                });
+            }
+
+            if (licenseNo) {
+                licenseNo.addEventListener('change', function() {
+                    licenseNo.nextElementSibling.classList.add('active');
+                    if (licenseYes) licenseYes.nextElementSibling.classList.remove('active');
+                });
+            }
+
+            // Prevent initial flash of red validation for select field if not filled
+            const carSelect = document.getElementById('car');
+            if (carSelect) {
+                carSelect.addEventListener('invalid', function() {
+                    this.classList.add('is-invalid');
+                });
+                carSelect.addEventListener('change', function() {
+                    if (this.value !== "") {
+                        this.classList.remove('is-invalid');
+                        this.classList.add('is-valid');
+                    } else {
+                        this.classList.remove('is-valid');
+                        this.classList.add('is-invalid');
+                    }
+                });
+            }
+
+            // Input field animations on focus (micro-interactions)
+            document.querySelectorAll('input.form-control, select.form-select, .btn-group .btn').forEach(element => {
+                element.addEventListener('focus', function() {
+                    if (!this.classList.contains('animate__animated') || !this.classList.contains('animate__bounceInDown')) {
+                         this.classList.add('animate__animated', 'animate__headShake', 'animate__faster');
+                    }
+                });
+                element.addEventListener('animationend', function() {
+                    this.classList.remove('animate__animated', 'animate__headShake', 'animate__faster');
+                });
+            });
+        });
+    </script>
+</body>
+</html>

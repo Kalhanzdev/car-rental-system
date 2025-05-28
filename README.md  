@@ -1,0 +1,106 @@
+# 🚗 Car Rental System
+
+A beautifully styled Flask web application that simulates a car rental booking process. Designed with modern UI effects, dynamic cost calculation, and robust validation, this system is both informative and elegant.
+
+---
+
+## ✨ Features
+
+* **Intuitive Booking Form**: User-friendly form for collecting rental details.
+* **Multiple Car Types**: Choose between Economy, Luxury, SUV, and Sport cars with different daily rates.
+* **Dynamic Cost Calculation**: Calculates total rental cost based on car type and rental days.
+* **Intelligent Discount System**:
+    * 10% discount applied for rentals exceeding 7 days.
+    * Additional 5% discount for total costs exceeding $500.
+* **Comprehensive Cost Breakdown**: Displays base cost, applied discounts, and a clear final cost that **includes all applicable taxes**.
+* **Robust Input Validation**: Ensures accurate and safe data entry, including:
+    * Required field checks.
+    * Age validation (renters must be 21+).
+    * Valid driver's license confirmation.
+    * Realistic rental day range (1 to 365 days).
+* **Interactive UI/UX**:
+    * Smooth entry animations for elements using **Animate.css**.
+    * Subtle hover and focus effects on form fields and buttons.
+    * Clear and engaging success/error messages.
+    * Responsive design for various screen sizes (thanks to **Bootstrap 5**).
+* **Single-Page Application Experience**: All core interactions (form submission, summary, errors) occur seamlessly, minimizing full page redirects.
+
+---
+
+## 📂 Project Structure
+car-rental-system/
+├── templates/
+│   ├── layout.html         # Base template for consistent page structure (header, footer, common CSS/JS).
+│   ├── index.html          # The main car rental booking form.
+│   ├── summary.html        # Displays the rental calculation summary.
+│   └── error.html          # Displays validation error messages.
+├── static/
+│   ├── css/
+│   │   └── style.css       # Custom CSS for additional styling and overrides.
+│   ├── img/
+│   │   └── favicon.ico     # Website favicon.
+│   └── js/
+│       └── script.js       # (Optional) Custom JavaScript for client-side interactions.
+├── app.py                  # The main Flask application logic.
+├── requirements.txt        # Lists all Python dependencies.
+└── README.md               # This file.
+
+---
+
+## 🔧 Requirements
+
+Make sure you have the following installed:
+
+* Python 3.x
+* pip (Python package manager)
+
+---
+
+## ⚙️ Installation
+
+1.  **Clone the repository:**
+    ```bash
+    git clone [https://github.com/your-username/car-rental-system.git](https://github.com/your-username/car-rental-system.git)
+    cd car-rental-system
+    ```
+
+2.  **Set up virtual environment:**
+    It's highly recommended to use a virtual environment to manage project dependencies.
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows, use: .\venv\Scripts\activate or venv\Scripts\activate.bat
+    ```
+
+3.  **Install dependencies:**
+    This command installs all required Python packages listed in `requirements.txt`.
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **Configure Secret Key:**
+    Flask requires a `SECRET_KEY` for session management (e.g., for flash messages and secure forms).
+    **Add this line to your `app.py` file, right after `app = Flask(__name__)`:**
+    ```python
+    app.config['SECRET_KEY'] = 'your_super_secret_key_here_replace_this_with_a_long_random_string'
+    ```
+    **IMPORTANT:** For a production environment, generate a truly random and complex key, and ideally manage it via environment variables for security.
+
+5.  **Run the app:**
+    ```bash
+    python app.py
+    ```
+
+6.  **View in browser:**
+    Open your web browser and navigate to:
+    ```
+    [http://127.0.0.1:5000/](http://127.0.0.1:5000/)
+    ```
+
+---
+
+## 🚀 Usage
+
+1.  Fill out the car rental form with your details, age, license confirmation, desired rental days, and car type.
+2.  Submit the form to see a detailed summary of your rental cost, including any applicable discounts and taxes, or a list of validation errors if any issues are found.
+
+---

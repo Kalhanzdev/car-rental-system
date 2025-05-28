@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<div class="main-content">
+    <div class="container my-5">
+        <div class="row justify-content-center">
+            <div class="col-lg-7 col-md-9 col-sm-11">
+                <div class="card error-card text-center animate__animated animate__fadeInUp">
+                    <div class="card-body">
+                        <h4 class="card-title mb-4 display-5 fw-bold text-dark animate__animated animate__shakeX">⚠️ Validation Errors!</h4>
+                        <p class="text-dark fs-5 animate__animated animate__fadeIn animate__delay-1s">Please correct the following issues:</p>
+                        <ul class="list-unstyled text-dark fs-5 text-start mt-4 animate__animated animate__fadeIn animate__delay-1-2s">
+                            {% if errors %} {# Check if errors list is not empty #}
+                                {% for error in errors %}
+                                <li>- {{ error }}</li>
+                                {% endfor %}
+                            {% else %}
+                                <li>An unexpected error occurred or required information was missing.</li>
+                            {% endif %}
+                        </ul>
+                        <p class="mt-4 mb-4 text-dark fs-5 animate__animated animate__fadeIn animate__delay-1-4s">Please go back to the form and correct the errors.</p>
+                        <a href="{{ url_for('rent_car') }}" class="btn btn-primary btn-lg mt-3 animate__animated animate__bounceInUp animate__delay-1-6s">Go Back to Form</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
